@@ -12,17 +12,17 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-const url = 'mongodb://localhost:27017/tic-tac-toe-local';
+// const url = 'mongodb://localhost:27017/tic-tac-toe-local';
 
-const client = new MongoClient(url, {useNewUrlParser:true, useUnifiedTopology: true})
+// const client = new MongoClient(url, {useNewUrlParser:true, useUnifiedTopology: true})
 
-client.connect((err) => {
-  if (err) { 
-    console.error('Failed to connect to MongoDB: ', err);
-  } else {
-    console.log('Connected to MongoDB');
-  }
-})
+// client.connect((err) => {
+//   if (err) { 
+//     console.error('Failed to connect to MongoDB: ', err);
+//   } else {
+//     console.log('Connected to MongoDB');
+//   }
+// })
 
 
 // const client
@@ -30,13 +30,13 @@ client.connect((err) => {
 // console.log(chalk.cyan("sdfdfs"))
 
 
-const gamesData = {
-  scope: {
-    cross: 0,
-    zerro: 0
-  },
-  queue: true,
-}
+// const gamesData = {
+//   scope: {
+//     cross: 0,
+//     zerro: 0
+//   },
+//   queue: true,
+// }
 
 
 app.post('/create', async (req, res) => {
@@ -67,8 +67,6 @@ app.get('/get', (req, res) => {
   catch (err) {
     res.status(500).json('server error', err)
    }
- 
-  
 })
 
 
