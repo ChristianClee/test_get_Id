@@ -1,0 +1,31 @@
+
+body{
+  /* background-color: aqua; */
+}
+.container {
+  /* position: relative; */
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-color: red; */
+  gap: 2rem
+}
+
+.screen {
+  border: 1px solid black;
+  width: 15rem;
+  height: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.requestBtn {
+  padding: 1rem;
+  border-radius: .5rem;
+}
+
+.requestBtn:active{
+  background-color: red;
+}

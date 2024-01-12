@@ -1,0 +1,22 @@
+version: '3'
+
+services: 
+
+  back:
+    build: ./api
+    container_name: back-end
+    restart: always
+    ports: 
+      - "5000:5000"
+
+
+
+
+  front:
+    image: nginx:latest
+    restart: always
+    ports: 
+      - "80:80"
+    container_name: nginx-front
+    volumes:
+      - ./frontTest:/usr/share/nginx/html 
