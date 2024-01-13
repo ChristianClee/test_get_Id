@@ -1,16 +1,29 @@
+"use strict"
 const dotenv = require('dotenv')
+const cookieParser = require('cookie-parser')
+const expressSession = require('express-session'); 
 const express = require('express')
 const cors = require('cors');
 const chalk = require('chalk')
-dotenv.config()
 const { MongoClient } = require('mongodb');
 
 
 
 
+
+dotenv.config()
 const app = express()
-app.use(cors())
+app.use(cookieParser())
+// app.use(expressSession({
+// 	secret: process.env.SECRET_KEY,
+// }));
+app.use(cors({
+  origin: ' http://localhost:3000', // replace with the actual origin of your frontend
+  credentials: true,
+}
+))
 app.use(express.json())
+
 
 // const url = 'mongodb://localhost:27017/tic-tac-toe-local';
 
@@ -58,15 +71,17 @@ app.post('/create', async (req, res) => {
 })
 
 
+app.get('/quit', (req, res) => {
+  console.log("quit!!!!")
+  res.status(200).send("ok")
+})
+
 app.get('/get', (req, res) => {
-  try {
-    const idUser = req.ip
-    if(idUser) res.status(200).json(idUser)
-    else res.status(300).json('server error')
-  }
-  catch (err) {
-    res.status(500).json('server error', err)
-   }
+  // res.setHeader('Set-Cookie','test=value');
+  // res.cookie('userTest', 'IlyaMishkov', { maxAge: 1000 * 60 * 10,httpOnly: false, path:'/',secure:false})
+  res.cookie('userTest', 'IlyaMishkov', {sameSite:'lax', httpOnly: false })
+  res.json("sending").status(200);
+
 })
 
 
