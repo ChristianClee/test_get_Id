@@ -1,7 +1,7 @@
 const { MongoClient, ObjectId } = require('mongodb');
 const chalk = require('chalk')
 const { gameMode, objResponse } = require('./variables');
-const { response } = require('express');
+
 
 
 class Utilits{
@@ -72,21 +72,21 @@ class Utilits{
 
     if (dataEmptyError) return dataEmptyError // ! fail responce db
                                               // ? or  response is empty
-                            
+    
     return {
       responce: dataResponce ,
       status: 200
     } // * sucsess response 
   }
 
-
   getTwoNumbers(str) {
     return  str.length < 2? '0' + str : str
   }
 
-
   async aviableGame() {
     const res = await this.getAllGame()
+    if (res.status >= 300) return res
+    
     const responce = res.responce
     const sortedResponce = responce.map(item => {
 
@@ -170,32 +170,25 @@ class Sending extends Utilits{
   sendJsonArr(res, data) {
     try { 
       const resData = data.responce 
-      res.json(resData).status(data.status)
+      res.status(data.status).json(resData)
     }
     catch (error) {
       this.errorMessage(res, error, data)
     }
   }
   
-
-
   sendJsonObj(res, data) {
     try { 
-      const resData = { ...data.responce }
-      res.json(resData).status(data.status)
+      res.status(data.status).json({ ...data.responce })
     }
     catch (error) {
       this.errorMessage(res, error, data)
     }
   }
 
-
-
-
-
   errorMessage(res, error, data) {
     console.error({ error: `errorMessage=${error}, data=${data}` })
-    res.json({ error: `server error check "errorMessage"` }).status(400)
+    res.status(400).json({ error: `server error check "errorMessage"` })
   }
 }
 

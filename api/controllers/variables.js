@@ -15,7 +15,7 @@ const objResponse = {
   },
   empty: {
     responce: [],
-    status: 200
+    status: 202
   },
 
   notExistClient: {

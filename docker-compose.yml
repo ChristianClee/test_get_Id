@@ -2,15 +2,13 @@ version: '3'
 
 services: 
   front:
-    # build: ./front_react
     image: nginx:latest
     restart: always
     ports: 
       - "80:80"
     container_name: nginx-front
     volumes:
-      - ./build-react:/usr/share/nginx/html 
-
+      - ./build:/usr/share/nginx/html 
 
 
   back:
@@ -23,12 +21,10 @@ services:
       - mongo
 
 
-
-
   mongo:
     image: mongo
     restart: always
-    container_name: localhost
+    container_name: my_mongo
     ports:
       - 27017:27017
 
