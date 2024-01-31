@@ -7,6 +7,8 @@ services:
     ports: 
       - "80:80"
     container_name: nginx-front
+    depends_on:
+      - mongo
     volumes:
       - ./build:/usr/share/nginx/html 
 
